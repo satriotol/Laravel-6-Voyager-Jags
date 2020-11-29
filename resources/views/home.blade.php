@@ -10,13 +10,16 @@
 </style>
 <div class="section py-5">
     <div class="container">
-        
+
         @foreach ($products as $product)
         {{$product -> categories}}
         {{$product -> name}}
         {{$product -> price}}
+        <br>
         @foreach(json_decode($product->image, true) as $image)
-        <img src="{{ Voyager::image($image) }}" />
+        @if ($loop->first)
+        <img class="img-thumbnail rounded" src="{{ Voyager::image($image) }}" />
+        @endif
         @endforeach
         @endforeach
     </div>
