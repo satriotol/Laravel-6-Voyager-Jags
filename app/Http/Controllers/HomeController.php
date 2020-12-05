@@ -10,6 +10,10 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('home',['products'=>Product::all(),'categories'=>Category::all()]);
+        return view('home');
+    }
+    public function products()
+    {
+        return view('products',['products'=>Product::all(),'categories'=>Category::all()]);
     }
 }

@@ -18,6 +18,11 @@
 <style>
     body {
         font-family: "AWConquerorCarvedOne", sans-serif;
+        background-color: black !important;
+    }
+
+    .bg-dark {
+        background-color: black !important;
     }
 
     .orange-color {
@@ -72,9 +77,6 @@
         font-size: 13px;
     }
 
-    .bg-dark {
-        background-color: black !important;
-    }
 
     /* flicky */
     .carousel {
@@ -158,8 +160,8 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mx-auto">
-                <li class="nav-item active">
-                    <a class="nav-link mx-3" href="#">HOME <span class="sr-only">(current)</span></a>
+                <li class="nav-item{{ Request::routeIs('home') ? 'active' : '' }}">
+                    <a class="nav-link mx-3" href="{{route('home')}}">HOME <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link mx-3" href="#">SALE</a>
@@ -168,42 +170,17 @@
                     <a class="nav-link mx-3" href="#">ABOUT US</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mx-3" href="#">CONTANT</a>
+                    <a class="nav-link mx-3" href="#">CONTACT</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link mx-3" href="#">PRODUCTS</a>
+                <li class="nav-item {{ Request::routeIs('products') ? 'active' : '' }}">
+                    <a class="nav-link mx-3" href="{{route('products')}}">PRODUCTS</a>
                 </li>
             </ul>
         </div>
     </nav>
-    <div class="carousel"
-        data-flickity='{ "wrapAround": true, "pageDots": false, "prevNextButtons": false,"fade":true,"fullscreen":true}'>
-        <div class="carousel-cell">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/orange-tree.jpg" alt="orange tree" />
-        </div>
-        <div class="carousel-cell">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/one-world-trade.jpg" alt="One World Trade" />
-        </div>
-        <div class="carousel-cell">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/drizzle.jpg" alt="drizzle" />
-        </div>
-        <div class="carousel-cell">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/cat-nose.jpg" alt="cat nose" />
-        </div>
-        <div class="carousel-cell">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/contrail.jpg" alt="contrail" />
-        </div>
-        <div class="carousel-cell">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/golden-hour.jpg" alt="golden hour" />
-        </div>
-        <div class="carousel-cell">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/flight-formation.jpg" alt="flight formation" />
-        </div>
-    </div>
-    <div class="btn btn-dark centered" style="font-size: 20px;min-width: 150px;">SHOP NOW</div>
-    <div class="btn btn-light centered-down" style="font-size: 20px;min-width: 250px;">CUSTOMIZE NOW</div>
+
     @yield('content')
-    <section class="pt-5 container-fluid bg-black">
+    <section class="pt-5 container-fluid bg-black mt-5">
         <div class="row text-center mx-5">
             <div class="col-sm-4">
                 <h4>Location</h4>
