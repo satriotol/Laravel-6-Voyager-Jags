@@ -131,7 +131,7 @@
         background-color: black;
     }
 
-    .bg-black h4 {
+    .bg-black h4, .bg-black h5 {
         font-weight: bold;
         color: white;
     }
@@ -160,20 +160,20 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mx-auto">
-                <li class="nav-item{{ Request::routeIs('home') ? 'active' : '' }}">
+                <li class="nav-item{{ Request::routeIs('home') ? ' active' : '' }}">
                     <a class="nav-link mx-3" href="{{route('home')}}">HOME <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link mx-3" href="#">SALE</a>
+                </li>
+                <li class="nav-item {{ Request::routeIs('products','product.show') ? 'active' : '' }}">
+                    <a class="nav-link mx-3" href="{{route('products')}}">PRODUCTS</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link mx-3" href="#">ABOUT US</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link mx-3" href="#">CONTACT</a>
-                </li>
-                <li class="nav-item {{ Request::routeIs('products') ? 'active' : '' }}">
-                    <a class="nav-link mx-3" href="{{route('products')}}">PRODUCTS</a>
                 </li>
             </ul>
         </div>

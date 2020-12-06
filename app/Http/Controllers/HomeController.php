@@ -16,4 +16,8 @@ class HomeController extends Controller
     {
         return view('products',['products'=>Product::all(),'categories'=>Category::all()]);
     }
+    public function productshow(Product $product)
+    {
+        return view('product_show',['products'=>Product::all()])->with('product',$product);
+    }
 }
