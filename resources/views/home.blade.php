@@ -68,15 +68,29 @@
         color: #FFFAFA;
     }
 
+    .shop-btn {
+        bottom: 500px;
+    }
+
+    .shop-btn a {
+        min-width: 250px;
+        max-width: 250px;
+        font-weight: 600;
+        border: 5px solid #343a40;
+        border-radius: 25px;
+    }
+
     @media (max-width: 767.98px) {
         .title-home {
             left: -125px;
             bottom: 200px;
         }
+
         .title-home h4 {
             font-size: 100px;
             color: #FFFAFA;
         }
+
         .body-home {
             bottom: 100px;
             left: -25px;
@@ -100,20 +114,19 @@
     </div>
 </div>
 
+
 {{-- <h4 class="title-h4">J<br>A<br>G<br>S</h4> --}}
 
 @endsection
 @section('script')
 <script>
-    // $(".carousel").after(txt);
-
-</script>
-<script>
     var txt1 = "<div class='title-home'><h4>JAGS</h4></div>";
     var txt2 = "<div class='body-home'><h4>WE CAN PRINT THE UNIVERSE</h4></div>";
+    var shopnow =
+        "<div class='shop-btn text-center w-100 position-absolute'><a href='{{ route('products') }}' class='btn btn-dark'>SHOP NOW</a></div>";
     $(".carousel").flickity({
         wrapAround: true,
-    }).append(txt1, txt2);
+    }).append(txt1, txt2, shopnow);
 
 </script>
 @endsection
