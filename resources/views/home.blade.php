@@ -35,19 +35,21 @@
     .flickity-page-dots .dot.is-selected {
         background: white;
     }
+
     .title-home {
         transform: rotate(90deg);
         position: absolute;
         left: -200px;
-        bottom: 300px;
+        bottom: 200px;
         padding: 0;
         margin-left: 50px;
         list-style: none;
         text-align: center;
         line-height: 1;
     }
-    .title-home h4{
-        font-size: 250px;
+
+    .title-home h4 {
+        font-size: 200px;
         color: #FFFAFA;
     }
 
@@ -60,23 +62,43 @@
         text-align: center;
         line-height: 1;
     }
-    .body-home h4{
+
+    .body-home h4 {
         font-size: 40px;
         color: #FFFAFA;
     }
 
+    @media (max-width: 767.98px) {
+        .title-home {
+            left: -125px;
+            bottom: 200px;
+        }
+        .title-home h4 {
+            font-size: 100px;
+            color: #FFFAFA;
+        }
+        .body-home {
+            bottom: 100px;
+            left: -25px;
+        }
+
+        .body-home h4 {
+            font-size: 20px;
+        }
+    }
+
 </style>
-    <div class="carousel" id="test">
-        <div class="carousel-cell">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/orange-tree.jpg" alt="orange tree" />
-        </div>
-        <div class="carousel-cell">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/one-world-trade.jpg" alt="One World Trade" />
-        </div>
-        <div class="carousel-cell">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/drizzle.jpg" alt="drizzle" />
-        </div>
+<div class="carousel" id="test">
+    <div class="carousel-cell">
+        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/orange-tree.jpg" alt="orange tree" />
     </div>
+    <div class="carousel-cell">
+        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/one-world-trade.jpg" alt="One World Trade" />
+    </div>
+    <div class="carousel-cell">
+        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/drizzle.jpg" alt="drizzle" />
+    </div>
+</div>
 
 {{-- <h4 class="title-h4">J<br>A<br>G<br>S</h4> --}}
 
@@ -84,12 +106,14 @@
 @section('script')
 <script>
     // $(".carousel").after(txt);
+
 </script>
 <script>
-    var txt1 ="<div class='title-home'><h4>JAGS</h4></div>";
-    var txt2 ="<div class='body-home'><h4>WE CAN PRINT THE UNIVERSE</h4></div>";
+    var txt1 = "<div class='title-home'><h4>JAGS</h4></div>";
+    var txt2 = "<div class='body-home'><h4>WE CAN PRINT THE UNIVERSE</h4></div>";
     $(".carousel").flickity({
         wrapAround: true,
-    }).append(txt1,txt2);
+    }).append(txt1, txt2);
+
 </script>
 @endsection
