@@ -17,6 +17,9 @@
                 <div class="col-md-4">
                     <h4>IDR {{number_format($product -> price,2)}}</h4>
                     <div class="btn btn-light w-100">ORDER NOW</div>
+                    <input type="hidden" class="input-test">
+                    <p>Your Size is <span class="p-test">None</span></p>
+                    <p>Your Colour is <span class="p-test">None</span></p>
                 </div>
             </div>
             <div class="mt-5">
@@ -29,9 +32,7 @@
                     @if (!empty($product->size) > 0)
                     @foreach(json_decode($product->size, true) as $size)
                     <div class="col-sm-4 mt-2">
-                        <div class="btn btn-light w-100 text-center">
-                            {{$size}}
-                        </div>
+                        <input type="button" class="btn-test btn btn-light w-100 text-center" value="{{$size}}">
                     </div>
                     @endforeach
                 </div>
@@ -67,4 +68,14 @@
         @endforeach
     </div>
 </div>
+@endsection
+@section('jquery-script')
+<script>
+    $(".btn-test").click(function () {
+        var text = $(this).val();
+        $(".input-test").val(text);
+        $(".p-test").text(text);
+    });
+
+</script>
 @endsection
