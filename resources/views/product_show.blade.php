@@ -69,7 +69,7 @@
     </div>
 </div>
 @endsection
-@section('jquery-script')
+@section('script')
 <script>
     $(".btn-test").click(function () {
         var text = $(this).val();
