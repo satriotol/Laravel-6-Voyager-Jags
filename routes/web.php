@@ -22,6 +22,11 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('products','HomeController@products')->name('products');
 Route::get('products/{product}','HomeController@productshow')->name('product.show');
 Route::get('contact','HomeController@contact')->name('contact');
+Route::post('cart', 'CartController@addToCart')->name('front.cart');
+Route::get('/cart', 'CartController@listCart')->name('front.list_cart');
+Route::post('/cart/update', 'CartController@updateCart')->name('front.update_cart');
+
+
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
