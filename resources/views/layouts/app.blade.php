@@ -153,7 +153,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5 p-3">
         <a class="navbar-brand" href="{{route('home')}}">
             <span class="site-title">JAG's</span>
-            <p class="site-tagline">We Can Print The Universe</p>
+            <p class="site-tagline">We Spoke For Quality</p>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -178,7 +178,7 @@
                     <a class="nav-link mx-3" href="{{route('contact')}}">CONTACT</a>
                 </li>
             </ul>
-            <ul class="navbar-nav text-right">
+            <ul class="navbar-nav text-center">
                 <li class="nav-item">
                     <a class="nav-link text-decoration-none" href=""><i class="fa fa-shopping-cart fa-lg"
                             aria-hidden="true"></i></a>
