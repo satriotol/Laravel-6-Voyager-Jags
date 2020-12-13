@@ -20,4 +20,8 @@ class HomeController extends Controller
     {
         return view('product_show',['products'=>Product::all()])->with('product',$product);
     }
+    public function contact()
+    {
+        return view('contact');
+    }
 }

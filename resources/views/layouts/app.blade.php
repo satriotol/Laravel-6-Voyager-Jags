@@ -10,9 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
-
-
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>@yield('title')</title>
 </head>
 <style>
@@ -131,6 +129,9 @@
         background-color: black;
     }
 
+    .bg-black h1,
+    .bg-black h2,
+    .bg-black h3,
     .bg-black h4,
     .bg-black h5 {
         font-weight: bold;
@@ -150,7 +151,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5 p-3">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{{route('home')}}">
             <span class="site-title">JAG's</span>
             <p class="site-tagline">We Can Print The Universe</p>
         </a>
@@ -160,7 +161,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mx-auto">
+            <ul class="navbar-nav mx-auto text-center">
                 <li class="nav-item{{ Request::routeIs('home') ? ' active' : '' }}">
                     <a class="nav-link mx-3" href="{{route('home')}}">HOME <span class="sr-only">(current)</span></a>
                 </li>
@@ -173,41 +174,27 @@
                 <li class="nav-item">
                     <a class="nav-link mx-3" href="#">ABOUT US</a>
                 </li>
+                <li class="nav-item{{ Request::routeIs('contact') ? ' active' : '' }}">
+                    <a class="nav-link mx-3" href="{{route('contact')}}">CONTACT</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav text-right">
                 <li class="nav-item">
-                    <a class="nav-link mx-3" href="#">CONTACT</a>
+                    <a class="nav-link text-decoration-none" href=""><i class="fa fa-shopping-cart fa-lg"
+                            aria-hidden="true"></i></a>
                 </li>
             </ul>
         </div>
     </nav>
 
     @yield('content')
-    {{-- <section class="pt-5 container-fluid bg-black mt-5">
-        <div class="row text-center mx-5">
-            <div class="col-sm-4">
-                <h4>Location</h4>
-                <div class="mt-3">
-                    <p>Semarang, Jawa Tengah Indonesia 50198</p>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <h4>Our hours</h4>
-                <div class="mt-3">
-                    <p>08:00 AM – 17.00 PM <br>
-                        Monday – Friday <br>
-                        08:00 AM – 15:00 PM <br>
-                        Saturday – Sunday</p>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <h4>Contact Us</h4>
-                <div class="mt-3">
-                    <div class="mt-3">
-                        <p>Email: jagsincorporate@gmail.com</p>
-                    </div>
-                </div>
+    <section class="pt-5 container-fluid bg-black pb-5">
+        <div class="container">
+            <div class="text-right">
+                <p><span style="color: white" class="font-weight-bold">JAGS.ID </span>All Right Reserved.</p>
             </div>
         </div>
-    </section> --}}
+    </section>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
     </script>

@@ -17,6 +17,11 @@
         }
     }
 
+    i.fa.fa-caret-square-o-down.fa-lg {
+        color: white;
+        cursor: pointer;
+    }
+
 </style>
 <div class="bg-black">
     <div class="container">
@@ -31,7 +36,7 @@
                 @foreach ($products as $product)
                 @if ($product->categories == 'Jacket')
                 <div class="products-list col-md-6 col-sm-12 col-lg-4">
-                    <a href="{{route('product.show', $product->id)}}">
+                    <a class="text-decoration-none" href="{{route('product.show', $product->id)}}">
                         @foreach(json_decode($product->image, true) as $image)
                         @if ($loop->first)
                         <img class="card-img-top" src="{{ Voyager::image($image) }}" />
@@ -56,7 +61,7 @@
                 @foreach ($products as $product)
                 @if ($product->categories == 'T-Shirt')
                 <div class="products-list col-md-6 col-sm-12 col-lg-4">
-                    <a href="{{route('product.show', $product->id)}}">
+                    <a class="text-decoration-none" href="{{route('product.show', $product->id)}}">
                         @foreach(json_decode($product->image, true) as $image)
                         @if ($loop->first)
                         <img class="card-img-top" src="{{ Voyager::image($image) }}" />
@@ -75,4 +80,12 @@
         </div>
     </div>
 </div>
+@endsection
+@section('script')
+<script>
+    $("#togglenew").click(function () {
+        $(this).parent().nextAll('.products').first().toggle('slow');
+    });
+
+</script>
 @endsection

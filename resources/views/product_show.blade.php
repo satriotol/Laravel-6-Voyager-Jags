@@ -16,10 +16,16 @@
                 </div>
                 <div class="col-md-4">
                     <h4>IDR {{number_format($product -> price,2)}}</h4>
-                    <div class="btn btn-light w-100">ORDER NOW</div>
-                    <input type="hidden" class="input-test">
-                    <p>Your Size is <span class="p-test">None</span></p>
-                    <p>Your Colour is <span class="p-test">None</span></p>
+                    <form action="" method="post">
+                        @csrf
+                        <input type="submit" class="btn btn-light w-100" value="ORDER NOW">
+                        <input type="text" value="{{$product->name}}">
+                        <input type="text" value="{{number_format($product->price,2)}}">
+                        <input type="text" class="input-test">
+                        <input type="text" class="input-colour">
+                    </form>
+                    <p>Your Size is <span class="p-size">None</span></p>
+                    <p>Your Colour is <span class="p-colour">None</span></p>
                 </div>
             </div>
             <div class="mt-5">
@@ -32,7 +38,7 @@
                     @if (!empty($product->size) > 0)
                     @foreach(json_decode($product->size, true) as $size)
                     <div class="col-sm-4 mt-2">
-                        <input type="button" class="btn-test btn btn-light w-100 text-center" value="{{$size}}">
+                        <input type="button" class="btn-size btn btn-light w-100 text-center" value="{{$size}}">
                     </div>
                     @endforeach
                 </div>
@@ -44,6 +50,19 @@
             </div>
             <div class="mt-5">
                 <h5>Colour : </h5>
+                <div class="row">
+                    @if (!empty($product->colour)>0)
+                    @foreach(json_decode($product->colour, true) as $colour)
+                    <div class="col-sm-4 mt-2">
+                        <input type="button" class="btn-colour btn btn-light w-100 text-center" value="{{$colour}}">
+                    </div>
+                    @endforeach
+                    @else
+                    <div class="col-sm-4">
+                        <p>Kosong</p>
+                    </div>
+                    @endif
+                </div>
             </div>
         </div>
     </div>
@@ -71,11 +90,16 @@
 @endsection
 @section('script')
 <script>
-    $(".btn-test").click(function () {
+    $(".btn-size").click(function () {
         var text = $(this).val();
         $(".input-test").val(text);
-        $(".p-test").text(text);
+        $(".p-size").text(text);
     });
+    $(".btn-colour").click(function () {
+        var text = $(this).val();
+        $(".input-colour").val(text);
+        $(".p-colour").text(text);
+    })
 
 </script>
 @endsection
