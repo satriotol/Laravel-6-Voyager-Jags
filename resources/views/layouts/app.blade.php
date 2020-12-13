@@ -180,7 +180,7 @@
             </ul>
             <ul class="navbar-nav text-center">
                 <li class="nav-item">
-                    <a class="nav-link text-decoration-none" href="{{route('front.list_cart')}}"><i class="fa fa-shopping-cart fa-lg"
+                    <a class="nav-link text-decoration-none {{ Request::routeIs('front.list_cart') ? ' active' : '' }}" href="{{route('front.list_cart')}}"><i class="fa fa-shopping-cart fa-lg"
                             aria-hidden="true"></i></a>
                 </li>
             </ul>

@@ -43,7 +43,8 @@ Shoping Chart
                                                 width="100px" height="100px" alt="{{ $row['name'] }}"> --}}
                                         </div>
                                         <div class="media-body ">
-                                            <p>{{ $row['name'] }}</p>
+                                            <a href="{{route('product.show',$row['id'])}}">{{ $row['name'] }}</a>
+                                            {{-- <a></a> --}}
                                         </div>
                                     </div>
                                 </td>
@@ -73,8 +74,8 @@ Shoping Chart
                                 </td>
                             </tr>
                             @empty
-                            <tr>
-                                <td colspan="4">Tidak ada belanjaan</td>
+                            <tr class="text-white">
+                                <td colspan="4">No Items</td>
                             </tr>
                             @endforelse
                             <tr class="bottom_button">
