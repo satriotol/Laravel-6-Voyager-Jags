@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    private function getCarts()
+    public function getCarts()
     {
         $carts = json_decode(request()->cookie('dw-carts'), true);
         $carts = $carts != '' ? $carts:[];

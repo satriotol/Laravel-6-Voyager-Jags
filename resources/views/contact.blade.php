@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title')
+    CONTACT
+@endsection
 @section('content')
 <div class="bg-black">
     <div class="container">

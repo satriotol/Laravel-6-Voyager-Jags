@@ -32,8 +32,7 @@
                         <input type="text" name="price" value="{{number_format($product->price,2)}}">
                         <input type="text" name="size" class="input-test">
                         <input type="text" name="colour" class="input-colour">
-                        <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:"
-                            class="input-text qty">
+                        <input type="text" name="qty" maxlength="12" value="1">
                         <button
                             onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
                             class="increase items-count" type="button">

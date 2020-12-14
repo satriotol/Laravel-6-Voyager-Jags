@@ -185,7 +185,7 @@
                 <li class="nav-item">
                     <a class="nav-link text-decoration-none {{ Request::routeIs('front.list_cart') ? ' active' : '' }}" href="{{route('front.list_cart')}}"><i class="fa fa-shopping-cart fa-lg"
                             aria-hidden="true">
-                            {{-- <span>{{count($carts)}}</span> --}}
+                            <span style="color: #c0945c">{{count($carts)}}</span>
                         </i></a>
                 </li>
             </ul>

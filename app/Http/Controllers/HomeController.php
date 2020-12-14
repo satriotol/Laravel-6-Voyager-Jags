@@ -1,27 +1,31 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Category;
 use App\Product;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class HomeController extends CartController
 {
     public function index()
     {
-        return view('home');
+        $carts = $this->getCarts();
+        return view('home',compact('carts'));
     }
     public function products()
     {
-        return view('products',['products'=>Product::all(),'categories'=>Category::all()]);
+        $carts = $this->getCarts();
+        return view('products',['products'=>Product::all(),'categories'=>Category::all()],compact('carts'));
     }
     public function productshow(Product $product)
     {
-        return view('product_show',['products'=>Product::all()])->with('product',$product);
+        $carts = $this->getCarts();
+        return view('product_show',['products'=>Product::all()],compact('carts'))->with('product',$product);
     }
     public function contact()
     {
-        return view('contact');
+        $carts = $this->getCarts();
+        return view('contact',compact('carts'));
     }
+    
 }

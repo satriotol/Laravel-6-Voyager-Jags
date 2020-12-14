@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title')
+    PRODUCTS
+@endsection
 @section('content')
 <style>
     .active {
