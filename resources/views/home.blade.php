@@ -39,7 +39,7 @@
     .title-home {
         transform: rotate(90deg);
         position: absolute;
-        left: -200px;
+        left: -150px;
         bottom: 200px;
         padding: 0;
         margin-left: 50px;
@@ -57,7 +57,7 @@
         position: absolute;
         bottom: 0px;
         padding: 0;
-        margin-left: 50px;
+        margin-left: 100px;
         list-style: none;
         text-align: center;
         line-height: 1;
@@ -70,11 +70,10 @@
 
     .categories-layer {
         position: absolute;
-        height: 1000px;
+        height: 300px;
+        top: 700px;
         z-index: 1;
         width: 100%;
-        /* position: absolute; */
-        /* z-index: -1; */
     }
 
     .categories-home {
