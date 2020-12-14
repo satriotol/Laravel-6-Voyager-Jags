@@ -57,7 +57,7 @@
         position: absolute;
         bottom: 0px;
         padding: 0;
-        margin-left: 100px;
+        left: 100px;
         list-style: none;
         text-align: center;
         line-height: 1;
@@ -70,8 +70,7 @@
 
     .categories-layer {
         position: absolute;
-        height: 300px;
-        top: 700px;
+        top: 900px;
         z-index: 1;
         width: 100%;
     }
@@ -100,7 +99,7 @@
     @media (max-width: 767.98px) {
         .title-home {
             left: -125px;
-            bottom: 200px;
+            bottom: 150px;
         }
 
         .title-home h4 {
@@ -109,11 +108,21 @@
         }
 
         .body-home {
-            bottom: 100px;
-            left: -25px;
+            bottom: 50px;
+            left: 25px;
         }
 
         .body-home h4 {
+            font-size: 20px;
+        }
+
+        .categories-layer {
+            position: absolute;
+            top: 800px;
+            z-index: 1;
+            width: 100%;
+        }
+        .categories-layer h4{
             font-size: 20px;
         }
     }
