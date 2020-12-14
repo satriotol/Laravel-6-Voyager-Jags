@@ -1,6 +1,14 @@
 @extends('layouts.app')
 @section('content')
 <div class="container my-5">
+    @if (session()->has('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>{{session()->get('success')}}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
     <div class="row bg-black">
         <div class="col-md-4">
             @foreach(json_decode($product->image, true) as $image)

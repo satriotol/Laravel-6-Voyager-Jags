@@ -68,6 +68,24 @@
         color: #FFFAFA;
     }
 
+    .categories-layer {
+        position: absolute;
+        height: 1000px;
+        z-index: 1;
+        width: 100%;
+        /* position: absolute; */
+        /* z-index: -1; */
+    }
+
+    .categories-home {
+        position: absolute;
+        bottom: 100px;
+        padding: 0;
+        list-style: none;
+        text-align: center;
+        line-height: 1;
+    }
+
     .shop-btn {
         bottom: 500px;
     }
@@ -102,14 +120,26 @@
     }
 
 </style>
+<div class="categories-layer">
+    <div class='container-fluid categories-home'>
+        <h4 class='text-white'><a href='#men' class='text-white text-decoration-none'><span
+                    class='cat cat-active font-weight-bold'>MAN</span></a> / <a href='#women'
+                class='text-white text-decoration-none'><span class='cat font-weight-bold'>WOMEN</span> </a> / <a
+                href='#child' class='text-white text-decoration-none'><span class='cat font-weight-bold'>CHILD</span>
+            </a>
+        </h4>
+    </div>
+</div>
+
+
 <div class="carousel" id="test">
-    <div class="carousel-cell">
+    <div class="carousel-cell" id="men">
         <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/orange-tree.jpg" alt="orange tree" />
     </div>
-    <div class="carousel-cell">
+    <div class="carousel-cell" id="women">
         <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/one-world-trade.jpg" alt="One World Trade" />
     </div>
-    <div class="carousel-cell">
+    <div class="carousel-cell" id="child">
         <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/drizzle.jpg" alt="drizzle" />
     </div>
 </div>
@@ -124,9 +154,22 @@
     var txt2 = "<div class='body-home'><h4>WE SPOKE FOR QUALITY</h4></div>";
     var shopnow =
         "<div class='shop-btn text-center w-100 position-absolute'><a href='{{ route('products') }}' class='btn btn-dark'>SHOP NOW</a></div>";
+    var categories =
+        "<div class='container categories-home'><h4 class='text-white'><a href='#men' class='text-white text-decoration-none'><span class='cat cat-active font-weight-bold'>MAN</span></a> / <a href='#women' class='text-white text-decoration-none'><span class='cat font-weight-bold'>WOMEN</span> </a> / <a href='#child' class='text-white text-decoration-none'><span class='cat font-weight-bold'>CHILD</span> </a></h4></div>"
     $(".carousel").flickity({
         wrapAround: true,
+        hash: true,
+        pageDots: false
     }).append(txt1, txt2, shopnow);
+
+</script>
+<script>
+    $(document).ready(function () {
+        $(".cat").click(function () {
+            $(".cat").removeClass("cat-active");
+            $(this).addClass("cat-active");
+        });
+    });
 
 </script>
 @endsection

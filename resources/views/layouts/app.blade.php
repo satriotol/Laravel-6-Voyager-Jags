@@ -46,6 +46,9 @@
         color: #c0945c;
         transition: color .1s ease-in-out;
     }
+    .cat-active{
+        color: #c0945c;
+    }
 
     .navbar-dark .navbar-nav .active>.nav-link,
     .navbar-dark .navbar-nav .nav-link.active,
@@ -181,7 +184,9 @@
             <ul class="navbar-nav text-center">
                 <li class="nav-item">
                     <a class="nav-link text-decoration-none {{ Request::routeIs('front.list_cart') ? ' active' : '' }}" href="{{route('front.list_cart')}}"><i class="fa fa-shopping-cart fa-lg"
-                            aria-hidden="true"></i></a>
+                            aria-hidden="true">
+                            {{-- <span>{{count($carts)}}</span> --}}
+                        </i></a>
                 </li>
             </ul>
         </div>
@@ -202,6 +207,7 @@
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
     </script>
     <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <script src="https://unpkg.com/flickity-hash@1/hash.js"></script>
     @yield('script')
 
 </body>

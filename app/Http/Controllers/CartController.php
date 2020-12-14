@@ -29,7 +29,6 @@ class CartController extends Controller
             $carts[$request->id]['qty'] += $request->qty;
         }else{
             $product = Product::find($request->id);
-            //TAMBAHKAN DATA BARU DENGAN MENJADIKAN PRODUCT_ID SEBAGAI KEY DARI ARRAY CARTS
             $carts[$request->id] = [
                 'id' => $request->id,
                 'name' => $product->name,
@@ -40,9 +39,10 @@ class CartController extends Controller
             ];
         }
         $cookie = cookie('dw-carts',json_encode($carts), 2880);
+        session()->flash('success','Product Add To Cart Successfully');
         return redirect()->back()->cookie($cookie);
     }
-    public function listCart()
+    protected function listCart()
     {
         $carts = $this->getCarts();
         $subtotal = collect($carts)->sum(function($q){
@@ -52,23 +52,15 @@ class CartController extends Controller
     }
     public function updateCart(Request $request)
     {
-        //AMBIL DATA DARI COOKIE
         $carts = $this->getCarts();
-        //KEMUDIAN LOOPING DATA PRODUCT_ID, KARENA NAMENYA ARRAY PADA VIEW SEBELUMNYA
-        //MAKA DATA YANG DITERIMA ADALAH ARRAY SEHINGGA BISA DI-LOOPING
         foreach ($request->id as $key => $row) {
-            //DI CHECK, JIKA QTY DENGAN KEY YANG SAMA DENGAN PRODUCT_ID = 0
             if ($request->qty[$key] == 0) {
-                //MAKA DATA TERSEBUT DIHAPUS DARI ARRAY
                 unset($carts[$row]);
             } else {
-                //SELAIN ITU MAKA AKAN DIPERBAHARUI
                 $carts[$row]['qty'] = $request->qty[$key];
             }
         }
-        //SET KEMBALI COOKIE-NYA SEPERTI SEBELUMNYA
         $cookie = cookie('dw-carts', json_encode($carts), 2880);
-        //DAN STORE KE BROWSER.
         return redirect()->back()->cookie($cookie);
     }
 }

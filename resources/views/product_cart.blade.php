@@ -53,7 +53,7 @@ Shoping Chart
                                 </td>
                                 <td>
                                     <div class="product_count">
-                                        <input class="w-25" type="text" name="qty[]" id="sst{{ $row['id'] }}" maxlength="12"
+                                        <input class="w-25" type="text" name="qty[]" id="sst{{ $row['id'] }}"
                                             value="{{ $row['qty'] }}" title="Quantity:" class="input-text qty">
                                         <input type="hidden" name="id[]" value="{{ $row['id'] }}"
                                             class="form-control">
@@ -80,7 +80,12 @@ Shoping Chart
                             @endforelse
                             <tr class="bottom_button">
                                 <td>
-                                    <button class="btn btn-dark">Update Cart</button>
+                                    @if (!$carts)
+                                        <a href="{{route('products')}}" class="btn btn-light">Search For Product</a>
+                                        {{-- <button class="btn btn-dark">Update Cart</button> --}}
+                                    @else
+                                        <button class="btn btn-dark">Update Cart</button>
+                                    @endif
                                 </td>
                                 <td></td>
                                 <td></td>
