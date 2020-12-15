@@ -25,6 +25,9 @@ Route::get('contact','HomeController@contact')->name('contact');
 Route::post('cart', 'CartController@addToCart')->name('front.cart');
 Route::get('/cart', 'CartController@listCart')->name('front.list_cart');
 Route::post('/cart/update', 'CartController@updateCart')->name('front.update_cart');
+Route::get('/checkout','CartController@checkout')->name('front.checkout');
+Route::get('/api/city', 'CartController@getCity');
+Route::get('/api/district', 'CartController@getDistrict');
 
 
 

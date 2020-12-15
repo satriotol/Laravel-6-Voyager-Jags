@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\City;
+use App\District;
 use App\Product;
+use App\Province;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -64,6 +67,22 @@ class CartController extends Controller
     }
     public function checkout()
     {
-        // $provinces = Province::orderBy
+        $provinces = Province::orderBy('created_at','DESC')->get();
+        $carts = $this->getCarts();
+
+        $subtotal = collect($carts)->sum(function($q){
+            return $q['qty'] * $q['price'];
+        });
+        return view('product_checkout',compact('provinces','carts','subtotal'));
+    }
+    public function getCity()
+    {
+        $cities = City::where('province_id', request()->province_id)->get();
+        return response()->json(['status'=> 'success','data'=>$cities]);
+    }
+    public function getDistrict()
+    {
+        $districts = District::where('city_id', request()->city_id)->get();
+        return response()->json(['status'=> 'success','data'=> $districts]);
     }
 }

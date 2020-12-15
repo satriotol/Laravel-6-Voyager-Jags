@@ -42,7 +42,7 @@
                             class="reduced items-count" type="button">
                             <i class="lnr lnr-chevron-down"></i>
                         </button> --}}
-                        <input type="submit" class="btn btn-light w-100" value="ORDER NOW">
+                        <input type="submit" class="btn btn-light w-100" value="ADD TO CART">
                     </form>
                     {{-- <a href="https://wa.me/089620755330?text=Hi Jags I Want to Order : {{$product->name}}"
                     class="btn btn-light w-100" value="Order Now"></a> --}}

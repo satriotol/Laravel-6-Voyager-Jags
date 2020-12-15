@@ -103,7 +103,7 @@ Shoping Chart
                 <td>
                     <div class="checkout_btn_inner">
                         <a class="gray_btn" href="{{route('products')}}">Continue Shopping</a>
-                        <a class="main_btn" href="#">Proceed to checkout</a>
+                        <a class="main_btn" href="{{route('front.checkout')}}">Proceed to checkout</a>
                     </div>
                 </td>
             </tr>

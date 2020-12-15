@@ -11,6 +11,9 @@
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.css"
+        integrity="sha512-uHuCigcmv3ByTqBQQEwngXWk7E/NaPYP+CFglpkXPnRQbSubJmEENgh+itRDYbWV0fUZmUz7fD/+JDdeQFD5+A=="
+        crossorigin="anonymous" />
     <title>@yield('title')</title>
 </head>
 <style>
@@ -46,7 +49,8 @@
         color: #c0945c;
         transition: color .1s ease-in-out;
     }
-    .cat-active{
+
+    .cat-active {
         color: #c0945c;
     }
 
@@ -183,8 +187,8 @@
             </ul>
             <ul class="navbar-nav text-center">
                 <li class="nav-item">
-                    <a class="nav-link text-decoration-none {{ Request::routeIs('front.list_cart') ? ' active' : '' }}" href="{{route('front.list_cart')}}"><i class="fa fa-shopping-cart fa-lg"
-                            aria-hidden="true">
+                    <a class="nav-link text-decoration-none {{ Request::routeIs('front.list_cart') ? ' active' : '' }}"
+                        href="{{route('front.list_cart')}}"><i class="fa fa-shopping-cart fa-lg" aria-hidden="true">
                             <span style="color: #c0945c">{{count($carts)}}</span>
                         </i></a>
                 </li>
@@ -200,9 +204,8 @@
             </div>
         </div>
     </section>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
     </script>
