@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(ProvinceTableSeeder::class);
-        $this->call(CityTableSeeder::class);
-        // $this->call(DistrictTableSeeder::class);
+        // $this->call(CityTableSeeder::class);
+        $this->call(DistrictTableSeeder::class);
     }
 }
