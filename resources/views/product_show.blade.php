@@ -26,14 +26,13 @@
                     <h4>IDR {{number_format($product -> price,2)}}</h4>
                     <form action="{{ route('front.cart') }}" method="post">
                         @csrf
-                        <input type="submit" class="btn btn-light w-100" value="ORDER NOW">
                         <input type="text" name="id" value="{{$product->id}}">
                         <input type="text" name="name" value="{{$product->name}}">
                         <input type="text" name="price" value="{{number_format($product->price,2)}}">
                         <input type="text" name="size" class="input-test">
                         <input type="text" name="colour" class="input-colour">
-                        <input type="text" name="qty" maxlength="12" value="1">
-                        <button
+                        <input class="qty" type="hidden" name="qty" id="sst" value="1">
+                        {{-- <button
                             onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
                             class="increase items-count" type="button">
                             <i class="lnr lnr-chevron-up"></i>
@@ -42,7 +41,8 @@
                             onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
                             class="reduced items-count" type="button">
                             <i class="lnr lnr-chevron-down"></i>
-                        </button>
+                        </button> --}}
+                        <input type="submit" class="btn btn-light w-100" value="ORDER NOW">
                     </form>
                     {{-- <a href="https://wa.me/089620755330?text=Hi Jags I Want to Order : {{$product->name}}"
                     class="btn btn-light w-100" value="Order Now"></a> --}}

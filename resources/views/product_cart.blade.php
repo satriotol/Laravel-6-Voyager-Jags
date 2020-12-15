@@ -14,9 +14,7 @@ Shoping Chart
         </div>
     </div>
 </section>
-<!--================End Home Banner Area =================-->
 
-<!--================Cart Area =================-->
 <section class="cart_area">
     <div class="container">
         <div class="cart_inner">

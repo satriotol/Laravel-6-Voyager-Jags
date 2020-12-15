@@ -23,7 +23,6 @@ class CartController extends Controller
             'colour' => 'required',
             'qty' => 'required'
         ]);
-
         $carts = $this->getCarts();
         if ($carts && array_key_exists($request->id, $carts)) {
             $carts[$request->id]['qty'] += $request->qty;
@@ -46,7 +45,7 @@ class CartController extends Controller
     {
         $carts = $this->getCarts();
         $subtotal = collect($carts)->sum(function($q){
-            return $q['qty']*$q['price'];
+            return $q['qty'] * $q['price'];
         });
         return view('product_cart',compact('carts','subtotal'));
     }
@@ -62,5 +61,9 @@ class CartController extends Controller
         }
         $cookie = cookie('dw-carts', json_encode($carts), 2880);
         return redirect()->back()->cookie($cookie);
+    }
+    public function checkout()
+    {
+        // $provinces = Province::orderBy
     }
 }

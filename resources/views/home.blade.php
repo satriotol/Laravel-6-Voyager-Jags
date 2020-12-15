@@ -133,11 +133,10 @@
 </style>
 <div class="categories-layer">
     <div class='container-fluid categories-home'>
-        <h4 class='text-white'><a href='#men' class='text-white text-decoration-none'><span
-                    class='cat cat-active font-weight-bold'>MAN</span></a> / <a href='#women'
-                class='text-white text-decoration-none'><span class='cat font-weight-bold'>WOMEN</span> </a> / <a
-                href='#child' class='text-white text-decoration-none'><span class='cat font-weight-bold'>CHILD</span>
-            </a>
+        <h4 class='text-white'><a href='#men' class='text-white text-decoration-none'>
+            <span id="men-txt" class='cat font-weight-bold'>MAN</span></a> / 
+            <a href='#women'class='text-white text-decoration-none'><span id="women-txt" class='cat font-weight-bold'>WOMEN</span> </a> / 
+            <a href='#child' class='text-white text-decoration-none'><span id="child-txt" class='cat font-weight-bold'>CHILD</span> </a>
         </h4>
     </div>
 </div>
@@ -170,7 +169,8 @@
     $(".carousel").flickity({
         wrapAround: true,
         hash: true,
-        pageDots: false
+        pageDots: false,
+        prevNextButtons: false
     }).append(txt1, txt2, shopnow);
 
 </script>
@@ -180,6 +180,21 @@
             $(".cat").removeClass("cat-active");
             $(this).addClass("cat-active");
         });
+        if (location.hash === "#child") {
+            $("#men-txt").removeClass("cat-active");
+            $("#women-txt").removeClass("cat-active");
+            $("#child-txt").addClass("cat-active");
+        }
+        else if (location.hash === "#men" || location.hash === ""){
+            $("#men-txt").addClass("cat-active");
+            $("#women-txt").removeClass("cat-active");
+            $("#child-txt").removeClass("cat-active");
+        }
+        else{
+            $("#men-txt").removeClass("cat-active");
+            $("#women-txt").addClass("cat-active");
+            $("#child-txt").removeClass("cat-active");
+        }
     });
 
 </script>
