@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\City;
+use App\Customer;
 use App\District;
+use App\Order;
+use App\OrderDetail;
 use App\Product;
 use App\Province;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+
 
 class CartController extends Controller
 {
@@ -84,5 +90,68 @@ class CartController extends Controller
     {
         $districts = District::where('city_id', request()->city_id)->get();
         return response()->json(['status'=> 'success','data'=> $districts]);
+    }
+    public function processCheckout(Request $request)
+    {
+        $this->validate($request,[
+            'customer_name'=>'required|string|max:100',
+            'customer_phone'=>'required',
+            'email'=>'required|email',
+            'customer_address'=>'required|string',
+            'province_id' => 'required|exists:provinces,id',
+            'city_id' => 'required|exists:cities,id',
+            'district_id' => 'required|exists:districts,id'
+        ]);
+        DB::beginTransaction();
+        try{
+            $carts = $this->getCarts();
+            $subtotal = collect($carts)->sum(function($q){
+                return $q['qty'] * $q['price'];
+            });
+            $customer = Customer::create([
+                'name' => $request->customer_name,
+                'email' => $request->email,
+                'phone_number' => $request->customer_phone,
+                'address' => $request->customer_address,
+                'district_id' => $request->district_id,
+                'status' => false
+            ]);
+            $order = Order::create([
+                'invoice' => Str::random(4) . '-' . time(), //INVOICENYA KITA BUAT DARI STRING RANDOM DAN WAKTU
+                'customer_id' => $customer->id,
+                'customer_name' => $customer->name,
+                'customer_phone' => $request->customer_phone,
+                'customer_address' => $request->customer_address,
+                'district_id' => $request->district_id,
+                'subtotal' => $subtotal
+            ]);
+            foreach($carts as $row){
+                $product = Product::find($row['id']);
+                OrderDetail::create([
+                    'order_id' => $order->id,
+                    'product_id' => $row['id'],
+                    'price' => $row['price'],
+                    'qty' => $row['qty'],
+                    'weight' => $product->weight
+                ]);
+            }
+            DB::commit();
+            $carts =[];
+            $cookie = cookie('dw-carts',json_encode($carts),2880);
+            return redirect(route('front.finish_checkout', $order->invoice))->cookie($cookie);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()->with(['error' => $e->getMessage()]);
+        }
+    }
+    public function checkoutFinish($invoice)
+    {
+        $order = Order::with('district.city')->where('invoice',$invoice)->first();
+        $carts = $this->getCarts();
+
+        $subtotal = collect($carts)->sum(function($q){
+            return $q['qty'] * $q['price'];
+        });
+        return view('checkout_finish',compact('order','carts'));
     }
 }

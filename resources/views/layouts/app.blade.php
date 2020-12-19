@@ -149,9 +149,17 @@
         background-color: white
     }
 
-    .bg-white h4 {
+    .bg-white h1,
+    .bg-white h2,
+    .bg-white h3,
+    .bg-white h4,
+    .bg-white h5 {
         font-weight: bold;
         color: black;
+    }
+    /* border */
+    .rounded-50{
+        border-radius: 50px!important;
     }
 
 </style>
@@ -187,7 +195,7 @@
             </ul>
             <ul class="navbar-nav text-center">
                 <li class="nav-item">
-                    <a class="nav-link text-decoration-none {{ Request::routeIs('front.list_cart') ? ' active' : '' }}"
+                    <a class="nav-link text-decoration-none {{ Request::routeIs('front.list_cart','front.checkout') ? ' active' : '' }}"
                         href="{{route('front.list_cart')}}"><i class="fa fa-shopping-cart fa-lg" aria-hidden="true">
                             <span style="color: #c0945c">{{count($carts)}}</span>
                         </i></a>

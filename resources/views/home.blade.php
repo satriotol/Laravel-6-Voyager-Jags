@@ -170,7 +170,8 @@
         wrapAround: true,
         hash: true,
         pageDots: false,
-        prevNextButtons: false
+        prevNextButtons: false,
+        draggable: false
     }).append(txt1, txt2, shopnow);
 
 </script>
