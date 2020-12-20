@@ -5,14 +5,16 @@ namespace App\Http\Controllers;
 use App\City;
 use App\Customer;
 use App\District;
+use App\Mail\TestEmail;
 use App\Order;
 use App\OrderDetail;
 use App\Product;
 use App\Province;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
-
+use PHPUnit\Util\Test;
 
 class CartController extends Controller
 {
@@ -138,6 +140,7 @@ class CartController extends Controller
             DB::commit();
             $carts =[];
             $cookie = cookie('dw-carts',json_encode($carts),2880);
+            Mail::to($customer['email'])->send(new TestEmail($customer));
             return redirect(route('front.finish_checkout', $order->invoice))->cookie($cookie);
         } catch (\Exception $e) {
             DB::rollback();

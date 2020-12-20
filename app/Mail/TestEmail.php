@@ -30,7 +30,7 @@ class TestEmail extends Mailable
     public function build()
     {
         return $this->from('satriotol69@gmail.com')
-        ->subject('Confirmation Order')
+        ->subject('Hey Jags! This Is Your Invoice')
         ->view('email.emailtemplate')
         ->with('data',$this->data);
     }
