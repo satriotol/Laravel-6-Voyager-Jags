@@ -195,7 +195,7 @@
             </ul>
             <ul class="navbar-nav text-center">
                 <li class="nav-item">
-                    <a class="nav-link text-decoration-none {{ Request::routeIs('front.list_cart','front.checkout') ? ' active' : '' }}"
+                    <a class="nav-link text-decoration-none {{ Request::routeIs('front.list_cart','front.checkout','front.finish_checkout') ? ' active' : '' }}"
                         href="{{route('front.list_cart')}}"><i class="fa fa-shopping-cart fa-lg" aria-hidden="true">
                             <span style="color: #c0945c">{{count($carts)}}</span>
                         </i></a>

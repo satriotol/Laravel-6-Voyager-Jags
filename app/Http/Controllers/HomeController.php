@@ -2,11 +2,34 @@
 
 namespace App\Http\Controllers;
 use App\Category;
+use App\Mail\TestEmail;
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends CartController
 {
+    public function SendEmail()
+    {
+        return view('email.sendemail');
+    }
+    function send(Request $request)
+    {
+        $this->validate($request, [
+        'name'     =>  'required',
+        'email'  =>  'required|email',
+        'message' =>  'required'
+    ]);
+    $data = array(
+        'name'      =>  $request->name,
+        'email' => $request->email,
+        'message'   =>   $request->message
+    );
+
+    Mail::to($data['email'])->send(new TestEmail($data));
+    return back()->with('success', 'Thanks for contacting us!');
+
+    }
     public function index()
     {
         $carts = $this->getCarts();

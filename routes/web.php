@@ -30,6 +30,9 @@ Route::post('/checkout', 'CartController@processCheckout')->name('front.store_ch
 Route::get('/checkout/{invoice}', 'CartController@checkoutFinish')->name('front.finish_checkout');
 Route::get('/api/city', 'CartController@getCity');
 Route::get('/api/district', 'CartController@getDistrict');
+Route::get('/kirimemail','HomeController@SendEmail');
+Route::post('/sendemail/send', 'HomeController@send')->name('email.send');
+
 
 
 
