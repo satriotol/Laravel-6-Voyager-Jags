@@ -31,6 +31,7 @@
                         <input type="text" name="price" value="{{number_format($product->price,2)}}">
                         <input type="text" name="size" class="input-test">
                         <input type="text" name="colour" class="input-colour">
+                        <input type="text" name="weight" value="{{$product->weight}}">
                         <input class="qty" type="hidden" name="qty" id="sst" value="1">
                         {{-- <button
                             onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"

@@ -28,6 +28,7 @@ Route::post('/cart/update', 'CartController@updateCart')->name('front.update_car
 Route::get('/checkout','CartController@checkout')->name('front.checkout');
 Route::post('/checkout', 'CartController@processCheckout')->name('front.store_checkout');
 Route::get('/checkout/{invoice}', 'CartController@checkoutFinish')->name('front.finish_checkout');
+Route::post('/api/cost', 'CartController@getCourier');
 Route::get('/api/city', 'CartController@getCity');
 Route::get('/api/district', 'CartController@getDistrict');
 Route::get('/kirimemail','HomeController@SendEmail');

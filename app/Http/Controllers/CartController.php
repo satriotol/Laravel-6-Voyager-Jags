@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
-use PHPUnit\Util\Test;
+use GuzzleHttp\Client;
 
 class CartController extends Controller
 {
@@ -32,7 +32,7 @@ class CartController extends Controller
             'price' => 'required',
             'size' => 'required',
             'colour' => 'required',
-            'qty' => 'required'
+            'qty' => 'required',
         ]);
         $carts = $this->getCarts();
         if ($carts && array_key_exists($request->id, $carts)) {
@@ -45,7 +45,8 @@ class CartController extends Controller
                 'price' => $product->price,
                 'size' => $product->size,
                 'colour' => $product->colour,
-                'qty' => $product->qty
+                'qty' => $product->qty,
+                'weight' => $product->weight
             ];
         }
         $cookie = cookie('dw-carts',json_encode($carts), 2880);
@@ -77,11 +78,13 @@ class CartController extends Controller
     {
         $provinces = Province::orderBy('created_at','DESC')->get();
         $carts = $this->getCarts();
-
         $subtotal = collect($carts)->sum(function($q){
             return $q['qty'] * $q['price'];
         });
-        return view('product_checkout',compact('provinces','carts','subtotal'));
+        $weight = collect($carts)->sum(function($q) {
+            return $q['qty'] * $q['weight'];
+        });
+        return view('product_checkout',compact('provinces','carts','subtotal','weight'));
     }
     public function getCity()
     {
@@ -102,7 +105,8 @@ class CartController extends Controller
             'customer_address'=>'required|string',
             'province_id' => 'required|exists:provinces,id',
             'city_id' => 'required|exists:cities,id',
-            'district_id' => 'required|exists:districts,id'
+            'district_id' => 'required|exists:districts,id',
+            'courier' => 'required'
         ]);
         DB::beginTransaction();
         try{
@@ -118,6 +122,7 @@ class CartController extends Controller
                 'district_id' => $request->district_id,
                 'status' => false
             ]);
+            $shipping = explode('-',$request->courier);
             $order = Order::create([
                 'invoice' => Str::random(4) . '-' . time(), //INVOICENYA KITA BUAT DARI STRING RANDOM DAN WAKTU
                 'customer_id' => $customer->id,
@@ -125,7 +130,9 @@ class CartController extends Controller
                 'customer_phone' => $request->customer_phone,
                 'customer_address' => $request->customer_address,
                 'district_id' => $request->district_id,
-                'subtotal' => $subtotal
+                'subtotal' => $subtotal,
+                'cost' => $shipping[2],
+                'shipping' => $shipping[0] . '-' . $shipping[1],
             ]);
             foreach($carts as $row){
                 $product = Product::find($row['id']);
@@ -156,5 +163,27 @@ class CartController extends Controller
             return $q['qty'] * $q['price'];
         });
         return view('checkout_finish',compact('order','carts'));
+    }
+    public function getCourier(Request $request)
+    {
+        $this->validate($request,[
+            'destination' => 'required',
+            'weight' => 'required|integer'
+        ]);
+        $url = 'https://ruangapi.com/api/v1/shipping';
+        $client = new Client();
+        $response = $client->request('POST',$url,[
+            'headers'=>[
+                'Authorization' => 'o6frnFO8kfanZeOJ8jaXsBdhpkwMBkaUAZVNRxPW',
+            ],
+            'form_params' => [
+                'origin' => 399,
+                'destination' => $request->destination,
+                'weight' => $request->weight,
+                'courier' => 'jne,jnt'
+            ]
+        ]);
+        $body = json_decode($response->getBody(),true);
+        return $body;
     }
 }
