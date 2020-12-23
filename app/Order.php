@@ -10,4 +10,8 @@ class Order extends Model
     public function district(){
         return $this->belongsTo(District::class);
     }
+    public function getTotalAttribute()
+    {
+    return $this->subtotal + $this->cost;
+}
 }

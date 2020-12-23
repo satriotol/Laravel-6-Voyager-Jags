@@ -76,7 +76,7 @@ Checkout
                             <option value="">Select District</option>
                         </select>
                     </div>
-                    <input type="text" name="weight" id="weight" value="{{ $weight }}">
+                    <input type="hidden" name="weight" id="weight" value="{{ $weight }}">
                     <div class="col-md-12 form-group p_star">
                         <label for="">Kurir</label>
                         <select class="form-control" name="courier" id="courier" required>
@@ -126,7 +126,7 @@ Checkout
                             <div class="col-3">
                             </div>
                             <div class="col-4">
-                                <p>IDR </p>
+                                <p id="ongkir">IDR 0</p>
                             </div>
                         </div>
                         <div class="items row">
@@ -136,7 +136,7 @@ Checkout
                             <div class="col-3">
                             </div>
                             <div class="col-4">
-                                <h5>IDR {{ number_format($subtotal),2 }}</h5>
+                                <h5 id="total">IDR {{ number_format($subtotal),2 }}</h5>
                             </div>
                         </div>
                     </div>
@@ -193,7 +193,6 @@ Checkout
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                // 'Authorization' : 'v3v8k5TbRgZ5ZeVTdxHRLTQ0ONeocLiuTUZnZgcw',
             url: "{{ url('/api/cost') }}",
             type: "POST",
             data: {
@@ -203,7 +202,7 @@ Checkout
                 $('#courier').empty()
                 $('#courier').append('<option value="">Pilih Kurir</option>')
                 $.each(html.data.results, function (key, item) {
-                    let courier = item.courier + ' - ' + item.service + ' (Rp ' + item
+                    let courier = item.courier + ' - ' + item.service + ' (IDR ' + item
                         .cost + ')'
                     let value = item.courier + '-' + item.service + '-' + item.cost
                     $('#courier').append('<option value="' + value + '">' + courier +
@@ -214,10 +213,11 @@ Checkout
     })
     $('#courier').on('change', function () {
         let split = $(this).val().split('-')
-        $('#ongkir').text('Rp ' + split[2])
+        $('#ongkir').text('IDR ' + split[2])
         let subtotal = "{{ $subtotal }}"
+        {{ number_format($subtotal),2 }}
         let total = parseInt(subtotal) + parseInt(split['2'])
-        $('#total').text('Rp' + total)
+        $('#total').text('IDR ' + total)
     })
 
 </script>

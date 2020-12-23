@@ -180,10 +180,10 @@ public function getCourier(Request $request)
             'Authorization' => 'v3v8k5TbRgZ5ZeVTdxHRLTQ0ONeocLiuTUZnZgcw'
         ],
         'form_params' => [
-            'origin' => 22, //ASAL PENGIRIMAN, 22 = BANDUNG
+            'origin' => 399, //ASAL PENGIRIMAN, 22 = BANDUNG
             'destination' => $request->destination,
             'weight' => $request->weight,
-            'courier' => 'jnt' //MASUKKAN KEY KURIR LAINNYA JIKA INGIN MENDAPATKAN DATA ONGKIR DARI KURIR YANG LAIN
+            'courier' => 'jnt,sicepat' //MASUKKAN KEY KURIR LAINNYA JIKA INGIN MENDAPATKAN DATA ONGKIR DARI KURIR YANG LAIN
         ]
     ]);
 
