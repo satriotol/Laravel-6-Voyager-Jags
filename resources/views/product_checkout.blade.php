@@ -186,16 +186,18 @@ Checkout
                 });
             },
         });
-    });
+    })
     $('#district_id').on('change', function () {
         $('#courier').empty()
         $('#courier').append('<option value="">Loading...</option>')
         $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                // 'Authorization' : 'v3v8k5TbRgZ5ZeVTdxHRLTQ0ONeocLiuTUZnZgcw',
             url: "{{ url('/api/cost') }}",
             type: "POST",
             data: {
-                destination: $(this).val(),
-                weight: $('#weight').val()
+                destination: $(this).val(),weight: $('#weight').val()
             },
             success: function (html) {
                 $('#courier').empty()

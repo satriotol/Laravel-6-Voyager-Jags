@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.css"
         integrity="sha512-uHuCigcmv3ByTqBQQEwngXWk7E/NaPYP+CFglpkXPnRQbSubJmEENgh+itRDYbWV0fUZmUz7fD/+JDdeQFD5+A=="
         crossorigin="anonymous" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>@yield('title')</title>
 </head>
 <style>
@@ -157,9 +159,10 @@
         font-weight: bold;
         color: black;
     }
+
     /* border */
-    .rounded-50{
-        border-radius: 50px!important;
+    .rounded-50 {
+        border-radius: 50px !important;
     }
 
 </style>

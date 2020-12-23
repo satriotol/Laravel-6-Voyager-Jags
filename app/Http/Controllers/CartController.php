@@ -164,26 +164,30 @@ class CartController extends Controller
         });
         return view('checkout_finish',compact('order','carts'));
     }
-    public function getCourier(Request $request)
-    {
-        $this->validate($request,[
-            'destination' => 'required',
-            'weight' => 'required|integer'
-        ]);
-        $url = 'https://ruangapi.com/api/v1/shipping';
-        $client = new Client();
-        $response = $client->request('POST',$url,[
-            'headers'=>[
-                'Authorization' => 'o6frnFO8kfanZeOJ8jaXsBdhpkwMBkaUAZVNRxPW',
-            ],
-            'form_params' => [
-                'origin' => 399,
-                'destination' => $request->destination,
-                'weight' => $request->weight,
-                'courier' => 'jne,jnt'
-            ]
-        ]);
-        $body = json_decode($response->getBody(),true);
-        return $body;
-    }
+public function getCourier(Request $request)
+{
+    $this->validate($request, [
+        'destination' => 'required',
+        'weight' => 'required|integer'
+    ]);
+
+    //MENGIRIM PERMINTAAN KE API RUANGAPI UNTUK MENGAMBIL DATA ONGKOS KIRIM
+    //BACA DOKUMENTASI UNTUK PENJELASAN LEBIH LANJUT
+    $url = 'https://ruangapi.com/api/v1/shipping';
+    $client = new Client();
+    $response = $client->request('POST', $url, [
+        'headers' => [
+            'Authorization' => 'v3v8k5TbRgZ5ZeVTdxHRLTQ0ONeocLiuTUZnZgcw'
+        ],
+        'form_params' => [
+            'origin' => 22, //ASAL PENGIRIMAN, 22 = BANDUNG
+            'destination' => $request->destination,
+            'weight' => $request->weight,
+            'courier' => 'jnt' //MASUKKAN KEY KURIR LAINNYA JIKA INGIN MENDAPATKAN DATA ONGKIR DARI KURIR YANG LAIN
+        ]
+    ]);
+
+    $body = json_decode($response->getBody(), true);
+    return $body;
+}
 }
