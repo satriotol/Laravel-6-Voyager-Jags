@@ -10,4 +10,8 @@ class District extends Model
     {
         return $this->belongsTo(City::class);
     }
+    public function province()
+    {
+        return $this->belongsTo(Province::class);
+    }
 }

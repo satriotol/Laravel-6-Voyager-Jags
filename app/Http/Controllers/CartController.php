@@ -157,12 +157,12 @@ class CartController extends Controller
     public function checkoutFinish($invoice)
     {
         $order = Order::with('district.city')->where('invoice',$invoice)->first();
+        $orderdetails = OrderDetail::all();
         $carts = $this->getCarts();
-
         $subtotal = collect($carts)->sum(function($q){
             return $q['qty'] * $q['price'];
         });
-        return view('checkout_finish',compact('order','carts'));
+        return view('checkout_finish',compact('order','carts','orderdetails'));
     }
 public function getCourier(Request $request)
 {
