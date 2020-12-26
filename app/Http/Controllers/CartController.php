@@ -146,8 +146,21 @@ class CartController extends Controller
             }
             DB::commit();
             $carts =[];
+            $data = array(
+                'invoice' => $order->invoice,
+                'name' => $request->customer_name,
+                'phone_number' => $request->customer_phone,
+                'address' => $request->customer_address,
+                'email' => $request->email,
+                'province' => $order->district->province->name,
+                'city' => $order->district->city->name,
+                'district' => $order->district->name,
+                'subtotal' => $order->subtotal,
+                'cost' => $order->cost,
+                'created_at' => $order->created_at
+            );
             $cookie = cookie('dw-carts',json_encode($carts),2880);
-            Mail::to($customer['email'])->send(new TestEmail($customer));
+            Mail::to($customer['email'])->send(new TestEmail($data));
             return redirect(route('front.finish_checkout', $order->invoice))->cookie($cookie);
         } catch (\Exception $e) {
             DB::rollback();

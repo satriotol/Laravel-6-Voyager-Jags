@@ -21,9 +21,9 @@ class HomeController extends CartController
         'message' =>  'required'
     ]);
     $data = array(
-        'name'      =>  $request->name,
-        'email' => $request->email,
-        'message'   =>   $request->message
+        'name'=>  $request->name,
+        'email'=> $request->email,
+        'message'=>   $request->message,
     );
 
     Mail::to($data['email'])->send(new TestEmail($data));
