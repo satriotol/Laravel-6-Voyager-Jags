@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-Keranjang Belanja - Dw Ecommerce
+Invoice
 @endsection
 
 @section('content')
@@ -57,18 +57,18 @@ Keranjang Belanja - Dw Ecommerce
                             @endif
                             @endforeach
                             <tr>
-                                <th colspan="3" class="text-center">SHIPPING</th>
+                                <th colspan="3" class="text-center">SHIPPING | {{$order->shipping}}</th>
                                 <td>IDR {{number_format($order->cost,2)}}</td>
                             </tr>
                             <tr>
                                 <th colspan="3" class="text-center">TOTAL</th>
-                                <td>IDR {{number_format($order->subtotal,2)}}</td>
+                                <td>IDR {{number_format($order->subtotal + $order->cost,2)}}</td>
                             </tr>
                         </tbody>
                     </table>
                     <div class="mt-5">
                         <p class="text-dark">Please check your e-mail for more information <br>
-                            or you can contact our admin via whatsapp</p>
+                            or you can contact our admin via whatsapp, <a href="">click this link</a></p>
                     </div>
                 </div>
             </div>
