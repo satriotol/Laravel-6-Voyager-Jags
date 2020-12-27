@@ -43,8 +43,8 @@ class CartController extends Controller
                 'id' => $request->id,
                 'name' => $product->name,
                 'price' => $product->price,
-                'size' => $product->size,
-                'colour' => $product->colour,
+                'size' => $request->size,
+                'colour' => $request->colour,
                 'qty' => $product->qty,
                 'weight' => $product->weight
             ];
@@ -157,7 +157,8 @@ class CartController extends Controller
                 'district' => $order->district->name,
                 'subtotal' => $order->subtotal,
                 'cost' => $order->cost,
-                'created_at' => $order->created_at
+                'created_at' => $order->created_at,
+                'subtotal' => $order->subtotal,
             );
             $cookie = cookie('dw-carts',json_encode($carts),2880);
             Mail::to($customer['email'])->send(new TestEmail($data));

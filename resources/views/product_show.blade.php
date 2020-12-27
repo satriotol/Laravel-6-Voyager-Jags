@@ -26,12 +26,12 @@
                     <h4>IDR {{number_format($product -> price,2)}}</h4>
                     <form action="{{ route('front.cart') }}" method="post">
                         @csrf
-                        <input type="text" name="id" value="{{$product->id}}">
-                        <input type="text" name="name" value="{{$product->name}}">
-                        <input type="text" name="price" value="{{number_format($product->price,2)}}">
-                        <input type="text" name="size" class="input-test">
-                        <input type="text" name="colour" class="input-colour">
-                        <input type="text" name="weight" value="{{$product->weight}}">
+                        <input type="hidden" name="id" value="{{$product->id}}">
+                        <input type="hidden" name="name" value="{{$product->name}}">
+                        <input type="hidden" name="price" value="{{number_format($product->price,2)}}">
+                        <input type="hidden" name="size" class="input-test">
+                        <input type="hidden" name="colour" class="input-colour">
+                        <input type="hidden" name="weight" value="{{$product->weight}}">
                         <input class="qty" type="hidden" name="qty" id="sst" value="1">
                         {{-- <button
                             onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"

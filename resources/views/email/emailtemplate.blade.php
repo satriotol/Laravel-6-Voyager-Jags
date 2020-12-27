@@ -33,9 +33,9 @@
                                 <th scope="col">SUBTOTAL</th>
                             </tr>
                         </thead>
-                        {{-- <tbody>
-                            @foreach ($orderdetails as $o)
-                            @if ($o->order_id === $order->id)
+                        <tbody>
+                        {{-- @foreach ($orderdetails as $o)
+                        @if ($o->order_id === $order->id)
                             <tr>
                                 <td>{{$o->product->name}}</td>
                         <td>{{$o->qty}}</td>
@@ -43,16 +43,16 @@
                         <td>IDR {{ number_format($o->price * $o->qty,2) }}</td>
                         </tr>
                         @endif
-                        @endforeach
+                        @endforeach --}}
                         <tr>
                             <th colspan="3" class="text-center">SHIPPING</th>
-                            <td>IDR {{number_format($order->cost,2)}}</td>
+                            <td>IDR {{number_format($data['cost'],2)}}</td>
                         </tr>
                         <tr>
                             <th colspan="3" class="text-center">TOTAL</th>
-                            <td>IDR {{number_format($order->subtotal,2)}}</td>
+                            <td>IDR {{number_format($data['subtotal'] + $data['cost'],2)}}</td>
                         </tr>
-                        </tbody> --}}
+                        </tbody>
                     </table>
                     <div class="mt-5">
                         <p class="text-dark">Please check your e-mail for more information <br>

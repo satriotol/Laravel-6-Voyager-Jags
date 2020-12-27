@@ -25,6 +25,7 @@ Shoping Chart
                         <thead>
                             <tr class="text-white">
                                 <th scope="col">Product</th>
+                                <th scope="col">Desc</th>
                                 <th scope="col">Price</th>
                                 <th scope="col">Quantity</th>
                                 <th scope="col">Total</th>
@@ -45,11 +46,13 @@ Shoping Chart
                                     </div>
                                 </td>
                                 <td>
+                                    <h5>{{$row['colour']}},{{$row['size']}}</h5>
+                                </td>
+                                <td>
                                     <h5>IDR. {{ number_format($row['price'],2) }}</h5>
                                 </td>
                                 <td>
-                                    <input type="text" name="qty[]" id="sst{{ $row['id'] }}"
-                                        value="{{ $row['qty'] }}">
+                                    <input type="text" name="qty[]" id="sst{{ $row['id'] }}" value="{{ $row['qty'] }}">
                                     <input type="hidden" name="id[]" value="{{ $row['id'] }}" class="form-control">
                                     <button
                                         onclick="var result = document.getElementById('sst{{ $row['id'] }}'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
@@ -81,10 +84,14 @@ Shoping Chart
                                 </td>
                                 <td></td>
                                 <td></td>
+                                <td>
+                                </td>
                                 <td></td>
                             </tr>
             </form>
             <tr class="text-white">
+                <td>
+                </td>
                 <td>
                 </td>
                 <td>
@@ -97,6 +104,7 @@ Shoping Chart
                 </td>
             </tr>
             <tr class="out_button_area">
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
