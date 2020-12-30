@@ -11,15 +11,18 @@ class TestEmail extends Mailable
 {
     use Queueable, SerializesModels;
     public $data;
+    public $pdf;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct($data,$pdf)
     {
         $this->data =$data;
+        $this->pdf = $pdf;
+
     }
 
     /**
@@ -29,9 +32,10 @@ class TestEmail extends Mailable
      */
     public function build()
     {
-        return $this->from('satriotol@jagsstore.com')
+        return $this->from('marketing@jaggs.id')
         ->subject('Hey Jags! This Is Your Invoice')
         ->view('email.emailtemplate')
-        ->with('data',$this->data);
+        ->with('data',$this->data)
+        ->attachData($this->pdf->output(),"invoice_pdf.pdf");
     }
 }

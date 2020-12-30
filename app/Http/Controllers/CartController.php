@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use GuzzleHttp\Client;
+use PDF;
+
 
 class CartController extends Controller
 {
@@ -160,8 +162,9 @@ class CartController extends Controller
                 'created_at' => $order->created_at,
                 'subtotal' => $order->subtotal,
             );
+            $pdf = PDF::loadView('invoice_pdf', $data);
             $cookie = cookie('dw-carts',json_encode($carts),2880);
-            Mail::to($customer['email'])->send(new TestEmail($data));
+            Mail::to($customer['email'])->send(new TestEmail($data,$pdf));
             return redirect(route('front.finish_checkout', $order->invoice))->cookie($cookie);
         } catch (\Exception $e) {
             DB::rollback();
@@ -178,30 +181,41 @@ class CartController extends Controller
         });
         return view('checkout_finish',compact('order','carts','orderdetails'));
     }
-public function getCourier(Request $request)
-{
-    $this->validate($request, [
-        'destination' => 'required',
-        'weight' => 'required|integer'
-    ]);
+    public function getCourier(Request $request)
+    {
+        $this->validate($request, [
+            'destination' => 'required',
+            'weight' => 'required|integer'
+        ]);
 
-    //MENGIRIM PERMINTAAN KE API RUANGAPI UNTUK MENGAMBIL DATA ONGKOS KIRIM
-    //BACA DOKUMENTASI UNTUK PENJELASAN LEBIH LANJUT
-    $url = 'https://ruangapi.com/api/v1/shipping';
-    $client = new Client();
-    $response = $client->request('POST', $url, [
-        'headers' => [
-            'Authorization' => 'v3v8k5TbRgZ5ZeVTdxHRLTQ0ONeocLiuTUZnZgcw'
-        ],
-        'form_params' => [
-            'origin' => 399, //ASAL PENGIRIMAN, 22 = BANDUNG
-            'destination' => $request->destination,
-            'weight' => $request->weight,
-            'courier' => 'jnt,sicepat' //MASUKKAN KEY KURIR LAINNYA JIKA INGIN MENDAPATKAN DATA ONGKIR DARI KURIR YANG LAIN
-        ]
-    ]);
+        //MENGIRIM PERMINTAAN KE API RUANGAPI UNTUK MENGAMBIL DATA ONGKOS KIRIM
+        //BACA DOKUMENTASI UNTUK PENJELASAN LEBIH LANJUT
+        $url = 'https://ruangapi.com/api/v1/shipping';
+        $client = new Client();
+        $response = $client->request('POST', $url, [
+            'headers' => [
+                'Authorization' => 'v3v8k5TbRgZ5ZeVTdxHRLTQ0ONeocLiuTUZnZgcw'
+            ],
+            'form_params' => [
+                'origin' => 399, //ASAL PENGIRIMAN, 22 = BANDUNG
+                'destination' => $request->destination,
+                'weight' => $request->weight,
+                'courier' => 'jnt,sicepat' //MASUKKAN KEY KURIR LAINNYA JIKA INGIN MENDAPATKAN DATA ONGKIR DARI KURIR YANG LAIN
+            ]
+        ]);
 
-    $body = json_decode($response->getBody(), true);
-    return $body;
-}
+        $body = json_decode($response->getBody(), true);
+        return $body;
+    }
+    // public function invoicepdf()
+    // {
+    //     $order = Order::with('district.city')->first();
+    //     $orderdetails = OrderDetail::all();
+    //     $carts = $this->getCarts();
+    //     $subtotal = collect($carts)->sum(function($q){
+    //         return $q['qty'] * $q['price'];
+    //     });
+    //     $pdf = PDF::loadview('invoice_pdf',['orderdetails'=>$orderdetails,'order'=>$order,'subtotal'=>$subtotal]);
+    //     return $pdf->download('laporan-pegawai-pdf');
+    // }
 }

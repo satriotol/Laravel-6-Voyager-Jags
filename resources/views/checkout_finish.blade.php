@@ -10,6 +10,7 @@ Invoice
         <h4>YEAH! THIS IS YOUR INVOICE</h4>
     </div>
 </section>
+{{-- <a href="{{route('front.pdf')}}" class="btn btn-primary" target="_blank">CETAK PDF</a> --}}
 <section class="bg-black">
     <div class="container">
         <div class="bg-white p-4 mt-3 rounded-50">

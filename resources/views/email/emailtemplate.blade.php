@@ -56,7 +56,8 @@
                     </table>
                     <div class="mt-5">
                         <p class="text-dark">Please check your e-mail for more information <br>
-                            or you can contact our admin via whatsapp</p>
+                            or you can contact our admin via whatsapp <br>
+                            open your invoice <a href="{{url('')}}/checkout/{{$data['invoice']}}">this</a></p>
                     </div>
                 </div>
             </div>
