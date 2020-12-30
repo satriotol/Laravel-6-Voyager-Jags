@@ -136,6 +136,7 @@ class CartController extends Controller
                 'cost' => $shipping[2],
                 'shipping' => $shipping[0] . '-' . $shipping[1],
             ]);
+            $orderdetails = OrderDetail::all();
             foreach($carts as $row){
                 $product = Product::find($row['id']);
                 OrderDetail::create([
@@ -162,7 +163,7 @@ class CartController extends Controller
                 'created_at' => $order->created_at,
                 'subtotal' => $order->subtotal,
             );
-            $pdf = PDF::loadView('invoice_pdf', $data);
+            $pdf = PDF::loadView('invoice_pdf', compact('order','customer','orderdetails','product','carts'));
             $cookie = cookie('dw-carts',json_encode($carts),2880);
             Mail::to($customer['email'])->send(new TestEmail($data,$pdf));
             return redirect(route('front.finish_checkout', $order->invoice))->cookie($cookie);
