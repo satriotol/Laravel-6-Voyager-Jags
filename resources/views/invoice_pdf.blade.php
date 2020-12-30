@@ -41,14 +41,16 @@ INVOICE
                             </tr>
                         </thead>
                         <tbody> 
-                            {{-- @foreach ($product as $p) --}}
+                            @foreach ($invoiceget as $i)
+                            @if ($i->order_id === $order->id)
                             <tr>
-                                <td>{{$product->name}}</td>
-                                <td>{{$product->qty}}</td>
-                                <td>IDR {{number_format($product->price,2)}}</td>
-                                <td>IDR {{ number_format($product->price * $product->qty,2) }}</td>
+                                <td>{{$i->product_name}}</td>
+                                <td>{{$i->qty}}</td>
+                                <td>IDR {{number_format($i->price,2)}}</td>
+                                <td>IDR {{ number_format($i->price * $i->qty,2) }}</td>
                             </tr>
-                            {{-- @endforeach --}}
+                            @endif
+                            @endforeach
                             <tr>
                                 <th colspan="3" class="text-center">SHIPPING | {{$order->shipping}}</th>
                                 <td>IDR {{number_format($order->cost,2)}}</td>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\City;
 use App\Customer;
 use App\District;
+use App\invoice;
 use App\Mail\TestEmail;
 use App\Order;
 use App\OrderDetail;
@@ -136,16 +137,22 @@ class CartController extends Controller
                 'cost' => $shipping[2],
                 'shipping' => $shipping[0] . '-' . $shipping[1],
             ]);
-            $orderdetails = OrderDetail::all();
             foreach($carts as $row){
                 $product = Product::find($row['id']);
-                OrderDetail::create([
+                $orderdetails = OrderDetail::create([
                     'order_id' => $order->id,
                     'product_id' => $row['id'],
                     'price' => $row['price'],
                     'qty' => $row['qty'],
                     'weight' => $product->weight
                 ]);
+                $invoice = invoice::create([
+                    'order_id' => $order->id,
+                    'product_name' => $row['name'],
+                    'qty' => $row['qty'],
+                    'price' => $row['price'],
+                ]);
+                $invoiceget = invoice::all();
             }
             DB::commit();
             $carts =[];
@@ -163,7 +170,7 @@ class CartController extends Controller
                 'created_at' => $order->created_at,
                 'subtotal' => $order->subtotal,
             );
-            $pdf = PDF::loadView('invoice_pdf', compact('order','customer','orderdetails','product','carts'));
+            $pdf = PDF::loadView('invoice_pdf', compact('order','customer','invoiceget','carts'));
             $cookie = cookie('dw-carts',json_encode($carts),2880);
             Mail::to($customer['email'])->send(new TestEmail($data,$pdf));
             return redirect(route('front.finish_checkout', $order->invoice))->cookie($cookie);
