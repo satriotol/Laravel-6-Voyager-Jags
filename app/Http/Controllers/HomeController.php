@@ -13,23 +13,6 @@ class HomeController extends CartController
     {
         return view('email.sendemail');
     }
-    function send(Request $request)
-    {
-        $this->validate($request, [
-        'name'     =>  'required',
-        'email'  =>  'required|email',
-        'message' =>  'required'
-    ]);
-    $data = array(
-        'name'=>  $request->name,
-        'email'=> $request->email,
-        'message'=>   $request->message,
-    );
-
-    Mail::to($data['email'])->send(new TestEmail($data));
-    return back()->with('success', 'Thanks for contacting us!');
-
-    }
     public function index()
     {
         $carts = $this->getCarts();

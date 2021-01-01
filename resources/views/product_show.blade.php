@@ -88,7 +88,7 @@
             <div class="carousel carousel-nav"
                 data-flickity='{ "asNavFor": ".carousel-main", "contain": true, "pageDots": false,"prevNextButtons": false }'>
                 @foreach(json_decode($product->image, true) as $image)
-                <div class="carousel-cell"><img class="card-img-top" style="height: 100%;object-fit: cover;" src="{{ Voyager::image($image) }}" /></div>
+                <div class="carousel-cell"><img class="card-img-top" style="height: 100%;object-fit: contain;" src="{{ Voyager::image($image) }}" /></div>
                 @endforeach
             </div>
         </div>

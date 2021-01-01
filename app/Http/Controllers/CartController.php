@@ -21,6 +21,7 @@ use PDF;
 
 class CartController extends Controller
 {
+
     public function getCarts()
     {
         $carts = json_decode(request()->cookie('dw-carts'), true);
