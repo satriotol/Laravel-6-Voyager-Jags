@@ -170,7 +170,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5 p-3">
         <a class="navbar-brand" href="{{route('home')}}">
-            <span class="site-title">JAG's</span>
+            <span class="site-title">JAGGS</span>
             <p class="site-tagline">We Spoke For Quality</p>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -211,7 +211,7 @@
     <section class="pt-5 container-fluid bg-black pb-5">
         <div class="container">
             <div class="text-right">
-                <p><span style="color: white" class="font-weight-bold">JAGS.ID </span>All Right Reserved.</p>
+                <p><span style="color: white" class="font-weight-bold">JAGGS.ID </span>All Right Reserved.</p>
             </div>
         </div>
     </section>

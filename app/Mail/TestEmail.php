@@ -32,9 +32,10 @@ class TestEmail extends Mailable
      */
     public function build()
     {
-        return $this->from('marketing@jaggs.id')
+        return $this->markdown('email.emailtemplate')
+        ->from('marketing@jaggs.id')
         ->subject('Hey Jags! This Is Your Invoice')
-        ->view('email.emailtemplate')
+        // ->view('email.emailtemplate')
         ->with('data',$this->data)
         ->attachData($this->pdf->output(),"invoice_pdf.pdf");
     }

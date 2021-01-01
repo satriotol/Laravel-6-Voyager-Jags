@@ -34,10 +34,6 @@ Route::get('/api/district', 'CartController@getDistrict');
 Route::get('/kirimemail','HomeController@SendEmail');
 Route::post('/sendemail/send', 'HomeController@send')->name('email.send');
 Route::get('/print_pdf', 'CartController@invoicepdf')->name('front.pdf');
-
-
-
-
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });

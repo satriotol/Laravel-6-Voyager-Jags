@@ -52,7 +52,7 @@
     }
 
     .title-home h4 {
-        font-size: 200px;
+        font-size: 140px;
         color: #FFFAFA;
     }
 
@@ -106,7 +106,7 @@
         }
 
         .title-home h4 {
-            font-size: 100px;
+            font-size: 70px;
             color: #FFFAFA;
         }
 
@@ -160,7 +160,7 @@
 @endsection
 @section('script')
 <script>
-    var txt1 = "<div class='title-home'><h4>JAGS</h4></div>";
+    var txt1 = "<div class='title-home'><h4>JAGGS</h4></div>";
     var txt2 = "<div class='body-home'><h4>WE SPOKE FOR QUALITY</h4></div>";
     var shopnow =
         "<div class='shop-btn text-center w-100 position-absolute'><a href='{{ route('products') }}' class='btn btn-dark'>SHOP NOW</a></div>";
