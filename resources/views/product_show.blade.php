@@ -1,3 +1,72 @@
+<style>
+    .flickity-enabled {
+        position: relative;
+    }
+
+    .flickity-enabled:focus {
+        outline: none;
+    }
+
+    .flickity-viewport {
+        overflow: hidden;
+        position: relative;
+        height: 100%;
+    }
+
+    .flickity-slider {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* draggable */
+
+    .flickity-enabled.is-draggable {
+        -webkit-tap-highlight-color: transparent;
+        tap-highlight-color: transparent;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .flickity-enabled.is-draggable .flickity-viewport {
+        cursor: move;
+        cursor: -webkit-grab;
+        cursor: grab;
+    }
+
+    .flickity-enabled.is-draggable .flickity-viewport.is-pointer-down {
+        cursor: -webkit-grabbing;
+        cursor: grabbing;
+    }
+
+    .carousel-main {
+        margin-bottom: 8px;
+    }
+
+    .carousel-cell {
+        width: 100%;
+        height: 504px;
+        margin-right: 8px;
+        /* counter-increment: carousel-cell; */
+    }
+    .carousel-nav .carousel-cell {
+        height: 90px;
+        width: 120px;
+    }
+
+    .carousel-main img {
+        display: block;
+        margin: 0 auto;
+    }
+
+    .container {
+        max-width: 672px;
+        margin: 0 auto;
+    }
+
+</style>
 @extends('layouts.app')
 @section('content')
 <div class="container my-5">
@@ -11,11 +80,17 @@
     @endif
     <div class="row bg-black">
         <div class="col-md-4">
-            @foreach(json_decode($product->image, true) as $image)
-            @if ($loop->first)
-            <img class="card-img-top" src="{{ Voyager::image($image) }}" />
-            @endif
-            @endforeach
+            <div class="carousel carousel-main" data-flickity='{"pageDots": false,"prevNextButtons": false }'>
+                @foreach(json_decode($product->image, true) as $image)
+                <div class="carousel-cell"> <img style="object-fit: cover;" class="card-img-top" src="{{ Voyager::image($image) }}" /></div>
+                @endforeach
+            </div>
+            <div class="carousel carousel-nav"
+                data-flickity='{ "asNavFor": ".carousel-main", "contain": true, "pageDots": false,"prevNextButtons": false }'>
+                @foreach(json_decode($product->image, true) as $image)
+                <div class="carousel-cell"><img class="card-img-top" style="height: 100%;object-fit: cover;" src="{{ Voyager::image($image) }}" /></div>
+                @endforeach
+            </div>
         </div>
         <div class="col-md-8">
             <div class="row">
