@@ -1,3 +1,6 @@
+@section('title')
+    {{$product->name}}
+@endsection
 <style>
     .flickity-enabled {
         position: relative;

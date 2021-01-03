@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use GuzzleHttp\Client;
 use PDF;
+use Midtrans\Snap;
 
 
 class CartController extends Controller
@@ -188,7 +189,29 @@ class CartController extends Controller
         $subtotal = collect($carts)->sum(function($q){
             return $q['qty'] * $q['price'];
         });
-        return view('checkout_finish',compact('order','carts','orderdetails'));
+        \Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
+        \Midtrans\Config::$isProduction = false;
+        \Midtrans\Config::$isSanitized = true;
+        \Midtrans\Config::$is3ds = true;
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => $order->id,
+                'gross_amount' => $order->subtotal + $order->cost,
+            ),
+            'customer_details' => array(
+                'first_name' => $order->customer_name,
+                // 'last_name' => 'pratama',
+                'email' => $order->customer->email,
+                'phone' => $order->customer->phone_number,
+            ),
+            'enabled_payments' => ["bca_va", "bni_va","shopeepay"],
+            'callbacks' => array (
+                'finish' => env('APP_URL'),
+            ),
+        );
+        
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+        return view('checkout_finish',compact('order','carts','orderdetails','snapToken'));
     }
     public function getCourier(Request $request)
     {

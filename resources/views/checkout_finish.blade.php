@@ -5,6 +5,16 @@ Invoice
 @endsection
 
 @section('content')
+<script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
+data-client-key="{{env('MIDTRANS_CLIENT_KEY')}}"></script>
+    <button id="pay-button">Pay!</button>
+    <script type="text/javascript">
+        var payButton = document.getElementById('pay-button');
+        // For example trigger on button clicked, or any time you need
+        payButton.addEventListener('click', function () {
+            snap.pay('<?php echo $snapToken ?>'); // Replace it with your transaction token
+        });
+    </script>
 <section class="header my-5">
     <div class="container text-center bg-black">
         <h4>YEAH! THIS IS YOUR INVOICE</h4>
