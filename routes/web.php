@@ -39,3 +39,5 @@ Route::get('/coba/test','MidtransController@checkout-process')->name('checkout-p
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+Route::get('/status', 'HomeController@status')->name('status');
+

@@ -33,5 +33,10 @@ class HomeController extends CartController
         $carts = $this->getCarts();
         return view('contact',compact('carts'));
     }
+    public function status()
+    {
+        $carts = $this->getCarts();
+        return view('status',compact('carts'));
+    }
     
 }
